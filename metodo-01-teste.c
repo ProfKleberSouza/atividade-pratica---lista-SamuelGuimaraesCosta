@@ -3,6 +3,7 @@
 #include "lista.h"
 
 int main() {
+
   Lista estoque;
 
   new_lista(&estoque);
