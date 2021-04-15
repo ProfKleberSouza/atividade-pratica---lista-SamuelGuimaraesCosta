@@ -11,6 +11,10 @@ typedef struct Produto {
   int quantidade;
 }Produto;
 
+void print_produto(Produto p) {
+  printf("PRODUTO: { Codigo: %d - Desc: %s - Valor: %.2f - Quant: %d }\n", p.codigo, p.descricao, p.valor, p.quantidade);
+}
+
 typedef struct Celula {
   Produto dado;
   struct Celula *prox;
@@ -26,43 +30,40 @@ typedef struct Lista {
   Celula *inicio;
   Celula *fim;
   int tam;
-} Lista;
+}Lista;
 
 void new_lista(Lista *l) {
   l->inicio = l->fim = new_celula();
   l->tam = 0;
 }
 
-void add_lista(Lista *l, Produto p) {
-  Celula *temp = (Celula*)malloc(sizeof(Celula));
-  temp->dado = p;
+void add_inicio_lista(Lista *l, Produto p) {
+  l->inicio->dado = p;
 
-  if(l->inicio == NULL) {
-    temp->prox = NULL;
-    l->inicio = temp;
-    l->fim = temp;
-  } else {
-    temp->prox = l->inicio;
-    l->inicio = temp;
-  }
+  Celula *temp = new_celula();
+  temp->prox = l->inicio;
+  l->inicio = temp;
 
   l->tam++;
 }
 
 void add_fim_lista(Lista *l, Produto p) {
-  Celula *temp = (Celula*)malloc(sizeof(Celula));
+  Celula *temp = new_celula();
   temp->dado = p;
-  temp->prox = NULL;
 
-  if(l->inicio == NULL) {
-    l->inicio = temp;
-    l->fim = temp;
-  } else {
-    l->fim->prox = temp;
-    l->fim = temp;
-  }
+  l->fim->prox = temp;
+  l->fim = temp;
 
   l->tam++;
+}
+
+void print_lista(Lista *l) {
+  Celula *temp = l->inicio->prox;
+
+  while(temp != NULL) {
+    print_produto(temp->dado);
+    temp = temp->prox;
+  }
 }
 
 #endif

@@ -7,14 +7,15 @@ int main() {
 
   new_lista(&estoque);
 
-  assert(estoque.tam == 0 && estoque.inicio != NULL && estoque.inicio == estoque.fim);
+  for(int i = 0; i < 5; i++) {
+    Produto p;
+    sprintf(p.descricao, "PRODDESC: %d", i + 1);
+    p.quantidade = rand()%100;
+    p.valor = rand()%100;
+    p.codigo = i + 1;
 
-  Produto entrada;
+    add_fim_lista(&estoque, p);
+  }
 
-  entrada.quantidade = 210;
-  entrada.codigo = 1;
-  strcpy(entrada.descricao, "P1");
-  entrada.valor = 999.99;
-
-  add_fim_lista(&estoque, entrada);
+  print_lista(&estoque);
 }
