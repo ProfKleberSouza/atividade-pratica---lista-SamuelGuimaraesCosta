@@ -49,4 +49,20 @@ void add_lista(Lista *l, Produto p) {
   l->tam++;
 }
 
+void add_fim_lista(Lista *l, Produto p) {
+  Celula *temp = (Celula*)malloc(sizeof(Celula));
+  temp->dado = p;
+  temp->prox = NULL;
+
+  if(l->inicio == NULL) {
+    l->inicio = temp;
+    l->fim = temp;
+  } else {
+    l->fim->prox = temp;
+    l->fim = temp;
+  }
+
+  l->tam++;
+}
+
 #endif
